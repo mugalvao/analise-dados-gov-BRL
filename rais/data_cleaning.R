@@ -1,12 +1,12 @@
 library(data.table)
 #Cria lista de arquivos .txt na pasta raw_data
-setwd("~/Desktop/tcc/bases/rais/analise_murilo/") # Tem que editar para cada computador que for rodar !!
+setwd("/Users/renantardelli/Desktop/tcc/data/rais")
 
-path_r <- "raw_data/" # Editar aqui para colocar output em outro lugar
+path_r <- "raw_data/"
 raw_files <- list.files(path_r)
 
 #Local dos arquivos depois de limpar
-path_clean <- "data/" # Editar aqui para colocar output em outro lugar
+path_clean <- "data/"
 
 # Como a ordem das colunas não muda podemos indexar pelo numero da coluna ou renomear 
 for(file in raw_files){
@@ -29,6 +29,6 @@ for(file in raw_files){
   
   names(base_full) <- new_cols
   base_full <- write.csv(base_full[base_full$municipio == 355030,],
-                         file=paste(path_clean, file, ".csv", sep = ""))
+                         file=paste(path_clean, file[:-4], ".csv", sep = ""))
   print(Sys.time()-start_time)
 }
