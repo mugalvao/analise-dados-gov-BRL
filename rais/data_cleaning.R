@@ -29,6 +29,6 @@ for(file in raw_files){
   
   names(base_full) <- new_cols
   base_full <- write.csv(base_full[base_full$municipio == 355030,],
-                         file=paste(path_clean, file[:-4], ".csv", sep = ""))
+                         file=paste(path_clean, substr(file, 1, 8), ".csv", sep = ""))
   print(Sys.time()-start_time)
 }
