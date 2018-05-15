@@ -12,7 +12,7 @@ path_clean <- "data/"
 for(file in raw_files){
   start_time <- Sys.time()
   print(paste("Reading file: ",file,sep = ""))
-  base_full <- fread(paste(path, file, sep=""), sep = ";", showProgress = F)
+  base_full <- fread(paste(path_r, file, sep=""), sep = ";", showProgress = F)
   
   new_cols=c('bairro_sp', 'bairros_fortaleza', 'bairros_rj', 'cnae2', 'cnae95',
              'distrito_sp', 'qtd_vclt', 'qtd_vativo', 'qtd_vestat', 'atividade_ano', 
