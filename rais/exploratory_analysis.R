@@ -26,19 +26,30 @@ rm(dtList)
 
 # Agrega por distrito
 aggVat <- aggregate(qtd_vativo ~ distrito_sp + year, data = fulldt, FUN=sum)
+aggInd <- aggregate(qtd_vativo ~ cnae2 + year,  data = fulldt, FUN=sum) 
+
 
 # Colocaa os anos como colunas
 dcastVat <- dcast(aggVat, distrito_sp ~ year)
+dcastInd <- dcast(aggInd, cnae2 ~ year)
 
 # Calcula o total de empregos por ano 
 total.jobs.year <- colSums(dcastVat[,-1], na.rm=T)
+total.ind.year <- colSums(dcastInd[,-1], na.rm=T)
 
 # Calcula o % de empregos por ano e por distrito
 evo.jobs.year <- dcastVat[,-1]/total.jobs.year
-
+evo.ind.year <- dcastInd[,-1]/total.ind.year
 
 x.axis <- as.numeric(names(evo.jobs.year))
-plot(x.axis, evo.jobs.year[8,], type = 'l')
+
+qplot(x=x.axis,y=as.numeric(evo.jobs.year[15,])) +
+  geom_smooth()
+
+qplot(x=x.axis,y=as.numeric(evo.ind.year[75,])) +
+  geom_smooth()
 
 
-
+# Os trabalhos estão mais distribuídos do que em 2006
+hist(evo.jobs.year$`2006`)
+hist(evo.jobs.year$`2016`)
